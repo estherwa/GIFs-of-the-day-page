@@ -10,6 +10,7 @@ const Store = ({ gifs, onBuy }:StoreProps) => {
           <img src={gif} alt={`gif-${index}`} width="150" height="150" />
           <Button onClick={() => onBuy(gif)}>Buy</Button>
         </Item>
+        
       ))}
     </Container>
   );
