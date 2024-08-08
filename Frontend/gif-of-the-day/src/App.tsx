@@ -6,32 +6,29 @@ import Store from './components/Store/Store.tsx';
 
 
 
-const App: React.FC = () => {
+const App= () => {
   const [gifs, setGifs] = useState<string[]>([]);
   const [trendingGifs, setTrendingGifs] = useState<string[]>([]);
   const [storeGifs, setStoreGifs] = useState<string[]>([]);
 
   useEffect(() => {
-
     fetchTrendingGifs();
   }, []);
 
   const fetchTrendingGifs = async () => {
-    const response = await fetch('https://developers.giphy.com');
+    const response = await fetch('http://localhost:5000/api/trending');
     const data = await response.json();
-    setTrendingGifs(data.data.map((gif: any) => gif.images.fixed_height.url));
+    setTrendingGifs(data);
   };
 
   const handleSearch = async (term: string) => {
-    const response = await fetch('https://developers.giphy.com'); // TODO CHNAGE
+    const response = await fetch(`http://localhost:5000/api/search?q=${term}`);
     const data = await response.json();
-    setGifs(data.data.map((gif: any) => gif.images.fixed_height.url));
+    setGifs(data);
   };
 
   const handleBuy = (gif: string) => {
-
-    //TODO
-    //setStoreGifs([...storeGifs, gif]);
+    setStoreGifs([...storeGifs, gif]);
   };
 
   return (
@@ -49,7 +46,6 @@ const App: React.FC = () => {
 };
 
 export default App;
-
 const Container = styled.div`
   padding: 20px;
 `;
