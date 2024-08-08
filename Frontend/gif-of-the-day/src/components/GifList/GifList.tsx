@@ -1,30 +1,37 @@
 import React from 'react';
 import styled from 'styled-components';
 
+const ListContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+`;
 
-const GifList = ({ gifs }: GifListProps) => {
+const Gif = styled.img`
+  width: 100px;
+  height: 100px;
+  margin: 10px;
+  cursor: pointer;
+  border: 2px solid transparent;
+  
+  &:hover {
+    border: 2px solid #4CAF50;
+  }
+`;
+
+interface GifListProps {
+  gifs: string[];
+  onSelect: (gif: string) => void;
+}
+
+const GifList: React.FC<GifListProps> = ({ gifs, onSelect }) => {
   return (
-    <Container>
+    <ListContainer>
       {gifs.map((gif, index) => (
-        <Gif key={index} src={gif} alt={`gif-${index}`} />
+        <Gif key={index} src={gif} alt={`gif-${index}`} onClick={() => onSelect(gif)} />
       ))}
-    </Container>
+    </ListContainer>
   );
 };
 
 export default GifList;
-
-
-interface GifListProps {
-    gifs: string[];
-}
-const Container = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-`;
-
-const Gif = styled.img`
-  width: 150px;
-  height: 150px;
-`;

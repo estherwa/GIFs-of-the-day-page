@@ -6,10 +6,11 @@ import Store from './components/Store/Store.tsx';
 
 
 
-const App= () => {
+const App: React.FC = () => {
   const [gifs, setGifs] = useState<string[]>([]);
   const [trendingGifs, setTrendingGifs] = useState<string[]>([]);
   const [storeGifs, setStoreGifs] = useState<string[]>([]);
+  const [selectedGif, setSelectedGif] = useState<string | null>(null);
 
   useEffect(() => {
     fetchTrendingGifs();
@@ -27,8 +28,15 @@ const App= () => {
     setGifs(data);
   };
 
-  const handleBuy = (gif: string) => {
-    setStoreGifs([...storeGifs, gif]);
+  const handleSelect = (gif: string) => {
+    setSelectedGif(gif);
+  };
+
+  const handlePaymentSuccess = () => {
+    if (selectedGif) {
+      setStoreGifs([...storeGifs, selectedGif]);
+      setSelectedGif(null);
+    }
   };
 
   return (
@@ -36,11 +44,11 @@ const App= () => {
       <h1>GIF Store</h1>
       <SearchBar onSearch={handleSearch} />
       <h2>Search Results</h2>
-      <GifList gifs={gifs} />
+      <GifList gifs={gifs} onSelect={handleSelect} />
       <h2>Trending GIFs</h2>
-      <GifList gifs={trendingGifs} />
+      <GifList gifs={trendingGifs} onSelect={handleSelect} />
       <h2>Store</h2>
-      <Store gifs={storeGifs} onBuy={handleBuy} />
+      <Store selectedGif={selectedGif} onPaymentSuccess={handlePaymentSuccess} />
     </Container>
   );
 };
@@ -48,4 +56,7 @@ const App= () => {
 export default App;
 const Container = styled.div`
   padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
