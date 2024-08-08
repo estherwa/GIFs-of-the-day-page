@@ -45,7 +45,7 @@ const App: React.FC = () => {
       <SearchBar onSearch={handleSearch} />
       <h2>Search Results</h2>
       <GifList gifs={gifs} onSelect={handleSelect} />
-      {gifs.length === 0 &&  <div> No results yet, seach for gifts!</div>}
+      {gifs.length === 0 && <div> No results yet, seach for gifts!</div>}
       <h2>Trending GIFs</h2>
       <GifList gifs={trendingGifs} onSelect={handleSelect} />
       <h2>Store</h2>
@@ -58,6 +58,7 @@ export default App;
 const Container = styled.div`
   padding: 20px;
   display: flex;
+  background-color: #8FBC8F;
   flex-direction: column;
   align-items: center;
 `;

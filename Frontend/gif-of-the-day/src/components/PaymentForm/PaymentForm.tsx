@@ -1,33 +1,8 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-const FormContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  max-width: 300px;
-  margin: 0 auto;
-`;
 
-const Input = styled.input`
-  margin-bottom: 10px;
-  padding: 8px;
-  font-size: 1em;
-`;
-
-const Button = styled.button`
-  padding: 10px;
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  cursor: pointer;
-  font-size: 1em;
-`;
-
-interface PaymentFormProps {
-  onPaymentSuccess: () => void;
-}
-
-const PaymentForm: React.FC<PaymentFormProps> = ({ onPaymentSuccess }) => {
+const PaymentForm = ({ onPaymentSuccess }:PaymentFormProps) => {
   const [cardNumber, setCardNumber] = useState('');
   const [expiryDate, setExpiryDate] = useState('');
   const [cvv, setCvv] = useState('');
@@ -74,3 +49,31 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ onPaymentSuccess }) => {
 };
 
 export default PaymentForm;
+
+const FormContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  max-width: 300px;
+  margin: 0 auto;
+`;
+
+const Input = styled.input`
+  margin-bottom: 10px;
+  padding: 8px;
+  font-size: 1em;
+`;
+
+const Button = styled.button`
+  padding: 10px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  cursor: pointer;
+  align-items: center;
+  font-size: 1em;
+  display: flex;
+`;
+
+interface PaymentFormProps {
+  onPaymentSuccess: () => void;
+}
